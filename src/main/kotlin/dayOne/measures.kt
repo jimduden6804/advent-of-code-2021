@@ -8,7 +8,7 @@ private fun countIncreases(prev: Int, current: Int): Int {
 }
 
 private fun readValues(): List<Int>{
-    return File("/home/jduden/code/learning/advent-of-code-2021/src/main/kotlin/a/values.txt").readLines().map { it.toInt() }
+    return File("/home/jduden/code/learning/advent-of-code-2021/src/main/kotlin/dayOne/values.txt").readLines().map { it.toInt() }
 }
 
 
