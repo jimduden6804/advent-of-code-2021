@@ -1,4 +1,4 @@
-package dayOne
+package aDayOne
 
 import java.io.File
 
