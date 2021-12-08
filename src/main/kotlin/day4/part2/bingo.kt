@@ -1,4 +1,4 @@
-package day4.part1
+package day4.part2
 
 import java.io.File
 
@@ -58,16 +58,21 @@ fun Board.score(currentDrawings: List<Int>): Int {
 
 fun game(boards: List<Board>, futureDrawings: List<Int>, round: Int = 1): Int {
     val currentDrawings = futureDrawings.take(round)
-    val maybeWinner = boards.filter { it.won(currentDrawings) }
-    return if (maybeWinner.isEmpty() and (round <= futureDrawings.size)) {
-        game(boards, futureDrawings, round + 1 )
+    return if (
+        ((boards.size <= 1) and (boards.first().won(currentDrawings)))
+        or (round > futureDrawings.size)
+    ) {
+        println("Found ${boards.size} Looser !")
+        println(boards.first())
+        println(currentDrawings)
+        boards.first().score(currentDrawings)
     } else {
-        println("Found ${maybeWinner.size} Winner !")
-        maybeWinner.first().score(currentDrawings)
+        val loosingBoards = boards.filter { it.won(currentDrawings).not() }
+        game(loosingBoards, futureDrawings, round + 1)
     }
 }
 
 fun main() {
     val input = readValues("/src/main/kotlin/day4/part1/values.txt")
-    println("Score: ${game (boards(input), drawings(input), 1)}")
+    println("Score: ${game(boards(input), drawings(input), 14)}")
 }
